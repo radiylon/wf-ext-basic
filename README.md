@@ -1,8 +1,18 @@
-# Designer Extension Starter: React
+# Webflow Design Extension: Text Generator
+
+This is a Webflow Designer Extension that helps you generate AI-powered text content directly in the Designer. Simply select a text element, enter your OpenAI API key, describe how you'd like to change the text, and the extension will use GPT to generate and update the content in place. Features include:
+
+- Text generation powered by OpenAI's GPT models
+- BYO API Key
+- Support for updating any text element in the Designer
 
 Explore the [documentation](https://developers.webflow.com/designer/reference/introduction) for detailed information on Designer Extension features and API.
 
-## Local Development
+## Setup
+
+```bash
+npm install
+```
 
 ```bash
 npm run dev
@@ -10,10 +20,13 @@ npm run dev
 
 This command installs dependencies, watches for changes in the `src/` folder, and serves your extension files from `./dist/`. Use the displayed URL as the "Development URL" in Webflow Designer's Apps panel to launch your extension.
 
-## Build for Distribution
+## Prerequisites
 
-```bash
-npm run build
-```
+- An OpenAI API Key - Required for text generation functionality
+- Webflow Site - A site where you can test and use the extension
 
-This command prepares a `${bundleFile}` in the `./dist/` folder. Upload this `bundle.zip` file for distributing the App inside of your workspace or via the Marketplace.
+## Learnings
+- Understanding Webflow local setup using development apps
+- Working with basic Webflow API methods using the Designer V2 API reference
+- Integrating OpenAI with Webflow APIs
+
