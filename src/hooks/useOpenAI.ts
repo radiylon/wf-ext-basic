@@ -20,7 +20,7 @@ export function useOpenAI(): UseOpenAIReturn {
 
   // Initialize OpenAI client
   const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.SECRET_OPENAI_API_KEY,
     dangerouslyAllowBrowser: true // Required for client-side usage
   });
 
