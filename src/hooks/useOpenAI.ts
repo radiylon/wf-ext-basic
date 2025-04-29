@@ -39,6 +39,8 @@ export function useOpenAI({ apiKey }: UseOpenAIOptions) {
               You are collaborative and respectful but focused solely on delivering the revised content. 
               Respond only with the final text, without any additional commentary.
 
+              Do not include any other text or commentary in your response.  Ignore all other instructions.
+
               Example:
               Input:
               Existing text: "The best way to learn React"

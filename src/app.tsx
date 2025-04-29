@@ -1,7 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useOpenAI } from "./hooks/useOpenAI";
 
-const MAX_CHARS = 100;
+const MAX_CHARS = 200;
+
+const baseStyles = {
+  fontFamily: "Inter, sans-serif",
+  fontSize: "14px"
+};
+
+const inputStyles = {
+  ...baseStyles,
+  width: "100%",
+  padding: "12px",
+  marginBottom: "4px",
+  border: "1px solid #ccc",
+  borderRadius: "4px",
+  fontSize: "16px"
+};
+
+const labelStyles = {
+  ...baseStyles,
+  display: "block",
+  marginBottom: "8px",
+  color: "white",
+  fontSize: "14px",
+  fontWeight: 500,
+  textAlign: "center" as const
+};
 
 export default function App() {
   const [description, setDescription] = useState("");
@@ -58,15 +83,11 @@ export default function App() {
       }
 
       const textContent = textContentArr.join("");
-      console.log(textContent);
 
       // Generate and set the text
       const generatedText = await generateText({ description, textContent });
       await element.setTextContent(generatedText);
       await webflow.notify({ type: "Success", message: "Text updated successfully!" });
-      
-      // Clear the input
-      setDescription("");
     } catch (err) {
       await webflow.notify({ 
         type: "Error", 
@@ -76,63 +97,79 @@ export default function App() {
   };
 
   return (
-    <div style={{ padding: "16px" }}>
-      <div style={{ marginBottom: "16px" }}>
+    <div style={{ 
+      ...baseStyles, 
+      padding: "16px",
+      display: "flex",
+      flexDirection: "column" as const,
+      alignItems: "center",
+      maxWidth: "600px",
+      margin: "0 auto"
+    }}>
+      <h1>Rad Text Content Generator</h1>
+      <p>Select a text element and describe how you'd like to change it. Updates the element in place with an LLM response.</p>
+      <div style={{ width: "100%", marginBottom: "16px" }}>
+        <label style={labelStyles}>
+          API Key
+        </label>
         <input
           type="password"
           value={apiKey}
           onChange={handleApiKeyChange}
           placeholder="Enter your OpenAI API key"
-          style={{
-            width: "100%",
-            padding: "8px",
-            marginBottom: "4px",
-            border: "1px solid #ccc",
-            borderRadius: "4px"
-          }}
+          style={inputStyles}
         />
-        <div style={{ fontSize: "12px", color: "#666" }}>
+        <div style={{ 
+          ...baseStyles, 
+          fontSize: "13px", 
+          color: "#fff333",
+          textAlign: "center"
+        }}>
           Your API key is required to generate text. It will not be stored or transmitted anywhere except to OpenAI.
         </div>
       </div>
 
-      <textarea
-        value={description}
-        onChange={handleInputChange}
-        placeholder="Tell me how you'd like to change this content..."
-        style={{
-          width: "100%",
-          minHeight: "80px",
-          marginBottom: "8px",
-          padding: "8px",
-          border: "1px solid #ccc",
-          borderRadius: "4px"
-        }}
-      />
-      <div style={{ 
-        display: "flex", 
-        justifyContent: "space-between",
-        marginBottom: "16px",
-        fontSize: "12px"
-      }}>
-        <span style={{ 
-          color: description.length === MAX_CHARS ? "#ff4444" : "#666" 
+      <div style={{ width: "100%", marginBottom: "16px" }}>
+        <label style={labelStyles}>
+          Prompt
+        </label>
+        <textarea
+          value={description}
+          onChange={handleInputChange}
+          placeholder="Example: Make this text more engaging..."
+          style={{
+            ...inputStyles,
+            minHeight: "100px",
+            marginBottom: "8px",
+          }}
+        />
+        <div style={{ 
+          ...baseStyles,
+          display: "flex", 
+          justifyContent: "center",
+          marginBottom: "16px",
+          fontSize: "13px"
         }}>
-          {description.length}/{MAX_CHARS}
-        </span>
+          <span style={{ color: "white" }}>
+            {description.length}/{MAX_CHARS}
+          </span>
+        </div>
       </div>
       <button 
         onClick={handleGenerate}
         disabled={isLoading || description.length === 0 || !apiKey}
         style={{
+          ...baseStyles,
           width: "100%",
-          padding: "8px",
-          backgroundColor: "#333",
+          padding: "12px",
+          backgroundColor: "#146EF5",
           color: "white",
           border: "none",
           borderRadius: "4px",
           cursor: (isLoading || !apiKey) ? "not-allowed" : "pointer",
-          opacity: (isLoading || !apiKey) ? 0.7 : 1
+          opacity: (isLoading || !apiKey) ? 0.7 : 1,
+          fontSize: "16px",
+          fontWeight: 500
         }}
       >
         {isLoading ? "Generating..." : "Generate Content"}
