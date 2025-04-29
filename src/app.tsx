@@ -5,11 +5,12 @@ const MAX_CHARS = 100;
 
 export default function App() {
   const [description, setDescription] = useState("");
-  const { generateText, isLoading, error } = useOpenAI();
+  const [apiKey, setApiKey] = useState("");
+  const { generateText, isLoading, error } = useOpenAI({ apiKey });
 
   useEffect(() => {
     void (async () => {
-      await webflow.setExtensionSize({ width: 500, height: 300 });
+      await webflow.setExtensionSize('large');
     })();
   }, []);
   
@@ -20,7 +21,16 @@ export default function App() {
     }
   };
 
+  const handleApiKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setApiKey(e.target.value.trim());
+  };
+
   const handleGenerate = async () => {
+    if (!apiKey) {
+      await webflow.notify({ type: "Error", message: "Please enter your OpenAI API key" });
+      return;
+    }
+
     try {
       // Get the current selected Element
       const element = await webflow.getSelectedElement() as DOMElement;
@@ -67,6 +77,25 @@ export default function App() {
 
   return (
     <div style={{ padding: "16px" }}>
+      <div style={{ marginBottom: "16px" }}>
+        <input
+          type="password"
+          value={apiKey}
+          onChange={handleApiKeyChange}
+          placeholder="Enter your OpenAI API key"
+          style={{
+            width: "100%",
+            padding: "8px",
+            marginBottom: "4px",
+            border: "1px solid #ccc",
+            borderRadius: "4px"
+          }}
+        />
+        <div style={{ fontSize: "12px", color: "#666" }}>
+          Your API key is required to generate text. It will not be stored or transmitted anywhere except to OpenAI.
+        </div>
+      </div>
+
       <textarea
         value={description}
         onChange={handleInputChange}
@@ -75,7 +104,9 @@ export default function App() {
           width: "100%",
           minHeight: "80px",
           marginBottom: "8px",
-          padding: "8px"
+          padding: "8px",
+          border: "1px solid #ccc",
+          borderRadius: "4px"
         }}
       />
       <div style={{ 
@@ -92,7 +123,7 @@ export default function App() {
       </div>
       <button 
         onClick={handleGenerate}
-        disabled={isLoading || description.length === 0}
+        disabled={isLoading || description.length === 0 || !apiKey}
         style={{
           width: "100%",
           padding: "8px",
@@ -100,8 +131,8 @@ export default function App() {
           color: "white",
           border: "none",
           borderRadius: "4px",
-          cursor: isLoading ? "not-allowed" : "pointer",
-          opacity: isLoading ? 0.7 : 1
+          cursor: (isLoading || !apiKey) ? "not-allowed" : "pointer",
+          opacity: (isLoading || !apiKey) ? 0.7 : 1
         }}
       >
         {isLoading ? "Generating..." : "Generate Content"}

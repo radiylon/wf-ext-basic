@@ -8,19 +8,17 @@ interface TextGenerationParams {
   maxLength?: number;
 }
 
-interface UseOpenAIReturn {
-  generateText: (params: TextGenerationParams) => Promise<string>;
-  isLoading: boolean;
-  error: string | null;
+interface UseOpenAIOptions {
+  apiKey: string;
 }
 
-export function useOpenAI(): UseOpenAIReturn {
+export function useOpenAI({ apiKey }: UseOpenAIOptions) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Initialize OpenAI client
   const client = new OpenAI({
-    apiKey: process.env.SECRET_OPENAI_API_KEY,
+    apiKey,
     dangerouslyAllowBrowser: true // Required for client-side usage
   });
 
