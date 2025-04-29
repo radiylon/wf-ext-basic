@@ -4,7 +4,13 @@ import webpack from "webpack";
 import dotenv from 'dotenv';
 
 // Load environment variables
-dotenv.config();
+const env = dotenv.config().parsed || {};
+
+// Create a formatted env object
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -39,7 +45,8 @@ export default {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.OPENAI_API_KEY': JSON.stringify(process.env.OPENAI_API_KEY)
+      ...envKeys,
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })
   ]
 };
