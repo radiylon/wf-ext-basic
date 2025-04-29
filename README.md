@@ -30,3 +30,4 @@ This command installs dependencies, watches for changes in the `src/` folder, an
 - Working with basic Webflow API methods using the Designer V2 API reference
 - Integrating OpenAI with Webflow APIs
 
+<img width="889" alt="Screenshot 2025-04-28 at 11 08 23 PM" src="https://github.com/user-attachments/assets/b0f25542-a4c6-4091-99e0-24046992158b" />
