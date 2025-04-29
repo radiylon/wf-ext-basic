@@ -1,11 +1,17 @@
 import path from "path";
 import { fileURLToPath } from "url";
+import webpack from "webpack";
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default {
   entry: "./src/index.tsx",
+  mode: "development",
   output: {
     filename: "bundle.js",
     path: path.resolve(dirname, "public"),
@@ -31,4 +37,9 @@ export default {
     compress: true,
     port: 3000,
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.OPENAI_API_KEY': JSON.stringify(process.env.OPENAI_API_KEY)
+    })
+  ]
 };
