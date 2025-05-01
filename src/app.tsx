@@ -1,34 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useOpenAI } from "./hooks/useOpenAI";
+import { useState, useEffect } from 'react';
+import { useOpenAI } from './hooks/useOpenAI';
 
 const MAX_CHARS = 200;
 
-const baseStyles = {
-  fontFamily: "Inter, sans-serif",
-  fontSize: "14px"
-};
-
-const inputStyles = {
-  ...baseStyles,
-  width: "100%",
-  padding: "12px",
-  marginBottom: "4px",
-  border: "1px solid #ccc",
-  borderRadius: "4px",
-  fontSize: "16px"
-};
-
-const labelStyles = {
-  ...baseStyles,
-  display: "block",
-  marginBottom: "8px",
-  color: "white",
-  fontSize: "14px",
-  fontWeight: 500,
-  textAlign: "center" as const
-};
-
-export default function App() {
+function App() {
   const [description, setDescription] = useState("");
   const [apiKey, setApiKey] = useState("");
   const { generateText, isLoading, error } = useOpenAI({ apiKey });
@@ -57,7 +32,6 @@ export default function App() {
     }
 
     try {
-      // Get the current selected Element
       const element = await webflow.getSelectedElement() as DOMElement;
 
       if (!element?.textContent && !element?.children) {
@@ -65,16 +39,10 @@ export default function App() {
         return;
       }
 
-      // Get Child Elements
       const children = await element.getChildren();
-
-      // Filter string elements from children
       const strings = children.filter(child => child.type === "String");
-
-      // Initialize an array to hold text content
       const textContentArr = [];
 
-      // Loop over string elements to get text
       for (const myString of strings) {
         if (myString.type === "String") {
           const text = await myString.getText();
@@ -84,7 +52,6 @@ export default function App() {
 
       const textContent = textContentArr.join("");
 
-      // Generate and set the text
       const generatedText = await generateText({ description, textContent });
       await element.setTextContent(generatedText);
       await webflow.notify({ type: "Success", message: "Text updated successfully!" });
@@ -97,19 +64,11 @@ export default function App() {
   };
 
   return (
-    <div style={{ 
-      ...baseStyles, 
-      padding: "16px",
-      display: "flex",
-      flexDirection: "column" as const,
-      alignItems: "center",
-      maxWidth: "600px",
-      margin: "0 auto"
-    }}>
-      <h1>Rad Text Content Generator</h1>
-      <p>Select a text element and describe how you'd like to change it. Updates the element in place with an LLM response.</p>
-      <div style={{ width: "100%", marginBottom: "16px" }}>
-        <label style={labelStyles}>
+    <div className="p-4 flex flex-col items-center max-w-2xl mx-auto bg-gray-900 text-white min-h-screen">
+      <h1 className="text-3xl font-bold mb-4 text-blue-400">Rad Text Content Generator</h1>
+      <p className="text-gray-300 mb-8 text-center">Select a text element and describe how you'd like to change it. Updates the element in place with an AI-generated result.</p>
+      <div className="w-full mb-6">
+        <label className="block text-blue-300 mb-2 font-medium">
           API Key
         </label>
         <input
@@ -117,63 +76,39 @@ export default function App() {
           value={apiKey}
           onChange={handleApiKeyChange}
           placeholder="Enter your OpenAI API key"
-          style={inputStyles}
+          className="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors"
         />
-        <div style={{ 
-          ...baseStyles, 
-          fontSize: "13px", 
-          color: "#fff333",
-          textAlign: "center"
-        }}>
+        <div className="mt-2 text-gray-400 text-sm text-center">
           Your API key is required to generate text. It will not be stored or transmitted anywhere except to OpenAI.
         </div>
       </div>
 
-      <div style={{ width: "100%", marginBottom: "16px" }}>
-        <label style={labelStyles}>
+      <div className="w-full mb-6">
+        <label className="block text-blue-300 mb-2 font-medium">
           Prompt
         </label>
         <textarea
           value={description}
           onChange={handleInputChange}
           placeholder="Example: Make this text more engaging..."
-          style={{
-            ...inputStyles,
-            minHeight: "100px",
-            marginBottom: "8px",
-          }}
+          className="w-full p-3 rounded bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 transition-colors min-h-[100px]"
         />
-        <div style={{ 
-          ...baseStyles,
-          display: "flex", 
-          justifyContent: "center",
-          marginBottom: "16px",
-          fontSize: "13px"
-        }}>
-          <span style={{ color: "white" }}>
-            {description.length}/{MAX_CHARS}
-          </span>
-        </div>
+        <span className="text-gray-400 text-sm text-right block hover:text-blue-400 transition-colors">{description.length}/{MAX_CHARS}</span>
       </div>
+
       <button 
         onClick={handleGenerate}
         disabled={isLoading || description.length === 0 || !apiKey}
-        style={{
-          ...baseStyles,
-          width: "100%",
-          padding: "12px",
-          backgroundColor: "#146EF5",
-          color: "white",
-          border: "none",
-          borderRadius: "4px",
-          cursor: (isLoading || !apiKey) ? "not-allowed" : "pointer",
-          opacity: (isLoading || !apiKey) ? 0.7 : 1,
-          fontSize: "16px",
-          fontWeight: 500
-        }}
+        className={`w-full py-3 px-4 rounded font-medium text-white transition-all
+          ${isLoading || !apiKey || description.length === 0 
+            ? 'bg-gray-600 cursor-not-allowed opacity-70' 
+            : 'bg-blue-500 hover:bg-blue-400 shadow-lg hover:shadow-blue-500/50'
+          }`}
       >
         {isLoading ? "Generating..." : "Generate Content"}
       </button>
     </div>
   );
 }
+
+export default App

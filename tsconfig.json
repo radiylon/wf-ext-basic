@@ -1,18 +1,7 @@
 {
-  "compilerOptions": {
-    "outDir": "public",
-    "target": "es6",
-    "lib": ["es6", "dom"],
-    "typeRoots": ["./node_modules/@types", "./node_modules/@webflow"],
-    "jsx": "react",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "baseUrl": "./",
-    "paths": {
-      "react": ["node_modules/react"],
-      "react-dom": ["node_modules/react-dom"]
-    }
-  },
-  "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules"]
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "name": "wf-ext-basic",
-  "publicDir": "public",
+  "publicDir": "dist",
   "size": "default",
   "apiVersion": "2"
 }

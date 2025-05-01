@@ -1,32 +1,74 @@
-# Webflow Design Extension: Text Generator
+# Webflow Designer Extension + React + TypeScript + Vite + TailwindCSS Starter
 
-This is a Webflow Designer Extension that helps you generate AI-powered text content directly in the Designer. Simply select a text element, enter your OpenAI API key, describe how you'd like to change the text, and the extension will use GPT to generate and update the content in place. Features include:
+This template provides a minimal setup to get started building Webflow Designer Extensions using TypeScript, Vite, React, and TailwindCSS. It combines the power of modern web development tools with Webflow's Designer Extension capabilities.
 
-- Text generation powered by OpenAI's GPT models
-- BYO API Key
-- Support for updating any text element in the Designer
+<img width="873" alt="Screenshot 2025-04-30 at 3 16 44 PM" src="https://github.com/user-attachments/assets/3c166681-1309-4674-9226-e625f279e9af" />
 
-Explore the [documentation](https://developers.webflow.com/designer/reference/introduction) for detailed information on Designer Extension features and API.
+## Features
 
-## Setup
+- ⚡️ [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
+- ⚛️ [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+- 🔷 [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- 🎨 [TailwindCSS](https://tailwindcss.com/) - A utility-first CSS framework
+- 🔌 [Webflow Designer Extension](https://developers.webflow.com/designer/docs/getting-started-designer-extensions) - Build powerful tools directly in the Webflow Designer
+- 🔥 [Hot Reloading](https://www.npmjs.com/package/@xatom/wf-app-hot-reload) - Seamless hot reloading for Webflow applications during development
 
+## Prerequisites
+
+Before you begin, ensure you have:
+- Node.js (v18 or higher)
+- npm or yarn
+- A Webflow account with Designer Extension development access
+
+## Getting Started
+
+1. Clone this repository:
+```bash
+git clone [repository-url]
+cd wf-ext-vite-react-tailwind-starter
+```
+
+2. Install dependencies:
 ```bash
 npm install
 ```
 
+3. Start the development server:
 ```bash
 npm run dev
 ```
 
-This command installs dependencies, watches for changes in the `src/` folder, and serves your extension files from `./dist/`. Use the displayed URL as the "Development URL" in Webflow Designer's Apps panel to launch your extension.
+4. Build for production:
+```bash
+npm run build
+```
+This will generate a `bundle.zip` file that you can upload to Webflow.
 
-## Prerequisites
+## Important Documentation
 
-- An OpenAI API Key - Required for text generation functionality
-- Webflow Site - A site where you can test and use the extension
+- [Getting Started with Designer Extensions](https://developers.webflow.com/designer/docs/getting-started-designer-extensions) - Learn how to set up and create your first Designer Extension
+- [Design Guidelines](https://developers.webflow.com/designer/docs/design-guidelines) - Best practices for designing Webflow Apps
+- [Publishing your Designer Extension](https://developers.webflow.com/designer/docs/publishing-your-app) - Guide to publishing your extension
 
-## Learnings
-- Understanding Webflow local setup using development apps
-- Working with basic Webflow API methods using the Designer V2 API reference
-- Integrating OpenAI with Webflow APIs
+## Project Structure
 
+```
+├── src/               # Source files
+├── public/           # Static assets
+├── webflow.config.js # Webflow extension configuration
+├── vite.config.ts    # Vite configuration
+└── tailwind.config.js # TailwindCSS configuration
+```
+
+## Development Notes
+
+- Utilizes Vite (can utilize Vite's plugin ecosystem)
+- Hot Reloading provided by [@Xatom's wf-app-hot-reload package](https://www.npmjs.com/package/@xatom/wf-app-hot-reload)
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+[MIT](LICENSE)
