@@ -1,27 +1,18 @@
 # Webflow Designer Extension + React + TypeScript + Vite + TailwindCSS Starter
-
-This template provides a minimal setup to get started building Webflow Designer Extensions using TypeScript, Vite, React, and TailwindCSS. It combines the power of modern web development tools with Webflow's Designer Extension capabilities.
-
-<img width="873" alt="Screenshot 2025-04-30 at 3 16 44 PM" src="https://github.com/user-attachments/assets/3c166681-1309-4674-9226-e625f279e9af" />
+This is a Webflow Designer Extension that helps you generate AI-powered text content directly in the Designer. Simply select a text element, enter your OpenAI API key, describe how you'd like to change the text, and the extension will use `gpt-4.1-nano` to generate and update the content in place. Features include:
 
 ## Features
-
-- ⚡️ [Vite](https://vitejs.dev/) - Next Generation Frontend Tooling
-- ⚛️ [React](https://reactjs.org/) - A JavaScript library for building user interfaces
-- 🔷 [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
-- 🎨 [TailwindCSS](https://tailwindcss.com/) - A utility-first CSS framework
-- 🔌 [Webflow Designer Extension](https://developers.webflow.com/designer/docs/getting-started-designer-extensions) - Build powerful tools directly in the Webflow Designer
-- 🔥 [Hot Reloading](https://www.npmjs.com/package/@xatom/wf-app-hot-reload) - Seamless hot reloading for Webflow applications during development
+- Text generation powered by OpenAI's chat completion models (gpt-4.1-nano)
+- BYO API Key
+- Support for updating any text element in the Designer
 
 ## Prerequisites
-
 Before you begin, ensure you have:
 - Node.js (v18 or higher)
 - npm or yarn
 - A Webflow account with Designer Extension development access
 
 ## Getting Started
-
 1. Clone this repository:
 ```bash
 git clone [repository-url]
@@ -44,31 +35,7 @@ npm run build
 ```
 This will generate a `bundle.zip` file that you can upload to Webflow.
 
-## Important Documentation
-
-- [Getting Started with Designer Extensions](https://developers.webflow.com/designer/docs/getting-started-designer-extensions) - Learn how to set up and create your first Designer Extension
-- [Design Guidelines](https://developers.webflow.com/designer/docs/design-guidelines) - Best practices for designing Webflow Apps
-- [Publishing your Designer Extension](https://developers.webflow.com/designer/docs/publishing-your-app) - Guide to publishing your extension
-
-## Project Structure
-
-```
-├── src/               # Source files
-├── public/           # Static assets
-├── webflow.config.js # Webflow extension configuration
-├── vite.config.ts    # Vite configuration
-└── tailwind.config.js # TailwindCSS configuration
-```
-
-## Development Notes
-
-- Utilizes Vite (can utilize Vite's plugin ecosystem)
-- Hot Reloading provided by [@Xatom's wf-app-hot-reload package](https://www.npmjs.com/package/@xatom/wf-app-hot-reload)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-[MIT](LICENSE)
+## Learnings
+- Understanding Webflow local setup using development apps
+- Working with basic Webflow API methods using the Designer V2 API reference
+- Integrating OpenAI with Webflow APIs
