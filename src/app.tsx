@@ -55,7 +55,7 @@ function App() {
       const generatedText = await generateText({ description, textContent });
       await element.setTextContent(generatedText);
       await webflow.notify({ type: "Success", message: "Text updated successfully!" });
-    } catch (err) {
+    } catch {
       await webflow.notify({ 
         type: "Error", 
         message: error || "Failed to generate text. Please try again." 
