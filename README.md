@@ -1,5 +1,7 @@
 # Webflow Designer Extension + React + TypeScript + Vite + TailwindCSS Starter
-This is a Webflow Designer Extension that helps you generate AI-powered text content directly in the Designer. Simply select a text element, enter your OpenAI API key, describe how you'd like to change the text, and the extension will use `gpt-4.1-nano` to generate and update the content in place. Features include:
+This is a Webflow Designer Extension that helps you generate AI-powered text content directly in the Designer. Simply select a text element, enter your OpenAI API key, describe how you'd like to change the text, and the extension will use `gpt-4.1-nano` to generate and update the content in place.
+
+<img width="672" alt="Screenshot 2025-04-30 at 5 26 30 PM" src="https://github.com/user-attachments/assets/a6ca8fa7-fc76-4622-8aca-a30c333c446f" />
 
 ## Features
 - Text generation powered by OpenAI's chat completion models (gpt-4.1-nano)
