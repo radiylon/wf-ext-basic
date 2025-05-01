@@ -1,5 +1,5 @@
 {
-  "name": "wf-ext-basic",
+  "name": "wf-ext-text-generator",
   "private": true,
   "version": "0.0.0",
   "type": "module",
